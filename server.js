@@ -6,9 +6,13 @@ const app = express()
 
 import connectDB from './db/connect.js'
 
+import notFoundMiddleware from './middleware/not-found.js'
+
 import bookRoutes from './routes/bookRoutes.js'
 
 app.use('/api/v1', bookRoutes)
+
+app.use(notFoundMiddleware)
 
 const port = process.env.PORT || 5000
 

@@ -17,7 +17,7 @@ const scraperObject = {
     const bookStacks = []
 
     // Get urls -> scrape books detail -> push data to array -> navigate to new pagination -> repeat
-    for (let i = 0; i <= 3; i++) {
+    for (let i = 0; i < 1; i++) {
       const bookUrlsData = await bookUrlsScrape(page)
       const bookDetailData = await bookDetailScrape(bookUrlsData, browser)
 
