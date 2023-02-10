@@ -1,5 +1,6 @@
 import bookDetailScrape from './scrape/book-detail-scrape.js'
 import bookUrlsScrape from './scrape/book-url-scrape.js'
+import monthFormatIndex from './utils/monthFormatIndex.js'
 
 const scraperObject = {
   url: 'http://books.toscrape.com',
@@ -7,6 +8,18 @@ const scraperObject = {
     let page = await browser.newPage()
     console.log(`Navigating to ${this.url}...`)
     await page.goto(this.url)
+
+    const pageCreatedDate = await page.$eval(
+      'head > meta:nth-child(3)',
+      (element) => element.content.split(' ')
+    )
+
+    // const dateFormatted = {
+    //   days: pageCreatedDate[0].replace(/[A-Za-z]+$/, ''),
+    //   month: monthFormatIndex(pageCreatedDate[1]),
+    //   year: pageCreatedDate[2],
+    // }
+    // console.log(dateFormatted)
 
     const paginationPages = await page.$eval(
       'ul > li.current',

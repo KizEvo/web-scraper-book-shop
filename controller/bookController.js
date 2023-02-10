@@ -4,24 +4,21 @@ import scrapeAll from '../pageController.js'
 
 const createBook = async (req, res) => {
   try {
-    // const browserInstance = await startBrowser()
-    // const data = await scrapeAll(browserInstance)
+    const browserInstance = await startBrowser()
+    const data = await scrapeAll(browserInstance)
 
-    // Book.createIndex
+    if (data.length === 0) throw new Error('Book scraper failed to get data')
 
-    // if (data.length === 0) throw new Error('Book scraper failed to get data')
+    // const randomPrice = Math.random() + 1
+    // const bookObj = {
+    //   title: 'First Book',
+    //   price: randomPrice,
+    //   expireAt: new Date(2023, 1, 10, 12, 45, 0), //new Date(Year, Month (Index: 0-11), Day, Hour, Minute, Second), GMT +0
+    // }
 
-    const randomPrice = Math.random() + 1
+    // const bookCreated = await Book.create(bookObj)
 
-    const bookObj = {
-      title: 'First Book',
-      price: randomPrice,
-      expireAt: new Date(2023, 1, 9, 10, 23, 0),
-    }
-
-    const bookCreated = await Book.create(bookObj)
-
-    res.status(200).json({ bookCreated })
+    res.status(200).json({ data })
   } catch (error) {
     console.log(error)
     res.status(400).json(error.message)
